@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A modern CLI application framework, empowering developers to craft CLI applications by seamlessly orchestrating independent small tasks.",
   "main": "index.js",
+  "files": ["dist/"],
   "scripts": {
     "test": "echo \"no test specified\"",
     "clean": "rm -rf node_modules && rm package-lock.json",

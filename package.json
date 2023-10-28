@@ -1,19 +1,20 @@
 {
   "name": "synthway",
   "version": "1.0.0",
-  "description": "",
+  "description": "A modern CLI application framework, empowering developers to craft CLI applications by seamlessly orchestrating independent small tasks.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf node_modules && rm package-lock.json",
-    "lint": "eslint 'src/**/*.{ts,tsx}'"
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "build": "tsc && node create-package.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ArioAtlas/Synthway.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Omid Golshan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ArioAtlas/Synthway/issues"

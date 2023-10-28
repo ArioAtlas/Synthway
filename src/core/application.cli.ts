@@ -1,14 +1,46 @@
 import yargs from 'yargs';
-import { CommandArgMeta, CommandMeta } from './types';
+import { ApplicationConfiguration, CommandArgMeta, CommandMeta } from './types';
+import { SpinnerInterface } from './interfaces';
+import { OraSpinner } from './components/spinners';
 
 export abstract class CliApplication {
-  constructor(protected version: string) {
-    this.initialize();
+  protected version: string;
+
+  protected spinner: SpinnerInterface;
+
+  constructor({ version, spinner }: ApplicationConfiguration) {
+    this.version = version ?? '1.0.0';
+    this.spinner = spinner ?? new OraSpinner();
   }
 
-  private initialize(): void {
+  private async initialize(): Promise<void> {
+    await this.spinner.initial();
     this.registerCommands();
-    yargs.version(this.version).help();
+    yargs.version(this.version).help().option('silent', {
+      alias: 's',
+      type: 'boolean',
+      description: 'Run without showing the loader',
+    });
+  }
+
+  protected startLoading(message?: string): void {
+    if (!this.isSilentMode()) {
+      this.spinner.start(message);
+    }
+  }
+
+  protected stopLoading(successMessage?: string): void {
+    if (!this.isSilentMode()) {
+      if (successMessage) {
+        this.spinner.succeed(successMessage);
+      } else {
+        this.spinner.stop();
+      }
+    }
+  }
+
+  private isSilentMode(): boolean {
+    return 'silent' in yargs.argv ? !!yargs.argv.silent : false;
   }
 
   private registerCommands() {
@@ -55,7 +87,8 @@ export abstract class CliApplication {
     return this._commands;
   }
 
-  public run(): void {
+  public async run(): Promise<void> {
+    await this.initialize();
     yargs.parse();
   }
 }

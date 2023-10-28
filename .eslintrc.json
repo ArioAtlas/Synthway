@@ -13,7 +13,7 @@
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "project": "./tsconfig.json"
+        "project": ["./tsconfig.json"]
     },
     "plugins": [
         "@typescript-eslint",
@@ -29,21 +29,20 @@
         "import/no-extraneous-dependencies": ["error", {
             "devDependencies": ["**/test/**/*.ts", "**/test/**/*.tsx"]
         }],
-        "indent": [
-            "error",
-            "tab"
-        ],
+        "indent": [ "error", 2 ],
         "linebreak-style": [
             "error",
             "unix"
         ],
-        "quotes": [
-            "error",
-            "single"
-        ],
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+              "singleQuote": true
+            }
+          ]
     }
 }

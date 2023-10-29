@@ -1,6 +1,6 @@
 {
   "name": "synthway",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A modern CLI application framework, empowering developers to craft CLI applications by seamlessly orchestrating independent small tasks.",
   "main": "index.js",
   "files": ["dist/"],

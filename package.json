@@ -5,6 +5,7 @@
   "main": "index.js",
   "files": ["dist/"],
   "scripts": {
+    "start": "npm run build && node ./dist/app.js",
     "test": "echo \"no test specified\"",
     "clean": "rm -rf node_modules && rm package-lock.json",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
@@ -35,6 +36,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "ora": "^5.4.1",
     "reflect-metadata": "^0.1.13",
     "yargs": "^17.7.2"
   }

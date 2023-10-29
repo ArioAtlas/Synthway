@@ -1,6 +1,6 @@
 {
   "name": "synthway",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A modern CLI application framework, empowering developers to craft CLI applications by seamlessly orchestrating independent small tasks.",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "clean": "rm -rf node_modules && rm package-lock.json",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "build": "tsc && node create-package.js",
-    "publish": "cd ./dist && npm pack"
+    "publish": "cd ./dist && npm publish"
   },
   "repository": {
     "type": "git",

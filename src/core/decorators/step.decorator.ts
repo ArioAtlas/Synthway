@@ -1,19 +1,25 @@
 import 'reflect-metadata';
-import { StepMetaData } from '../types';
+import {
+  ClassMethodsNames,
+  StepMetaData,
+  TypedMethodDecorator,
+} from '../types';
 import { STEP_META_KEY } from '../meta-data-keys.constant';
 
-export function Step(dependsOn: string[] = []): MethodDecorator {
+export function Step<M, T extends object>(
+  dependsOn: ClassMethodsNames<T>[] = [],
+): TypedMethodDecorator<M, T> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return function <T>(
-    target: object,
+  return function (
+    target: T,
     propertyKey: string | symbol,
-    descriptor: TypedPropertyDescriptor<T>,
+    descriptor: TypedPropertyDescriptor<M>,
   ) {
     if (!descriptor.value) {
       throw new Error('Invalid usage of @Step');
     }
 
-    const meta: StepMetaData<T>[] =
+    const meta: StepMetaData<T, M>[] =
       Reflect.getMetadata(STEP_META_KEY, target) || [];
     meta.push({
       name: propertyKey.toString(),

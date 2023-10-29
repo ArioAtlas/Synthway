@@ -6,7 +6,7 @@ import { SpinnerInterface } from './interfaces';
 export class TaskPipeline {
   protected spinner: SpinnerInterface;
 
-  private steps: StepMetaData[] = [];
+  private steps: StepMetaData<this>[] = [];
 
   private results: Map<string, unknown> = new Map();
 
@@ -44,12 +44,16 @@ export class TaskPipeline {
 
     if (current) {
       return current.method(
-        ...current.dependsOn.map((dependency) => this.results.get(dependency)),
+        ...current.dependsOn.map((dependency) =>
+          this.results.get(dependency.toString()),
+        ),
       );
     }
   }
 
-  private buildExecuteGraph(tasks: StepMetaData[]): Map<string, string[]> {
+  private buildExecuteGraph(
+    tasks: StepMetaData<this>[],
+  ): Map<string, string[]> {
     const graph = new Map<string, string[]>();
 
     for (const task of tasks) {
@@ -58,10 +62,10 @@ export class TaskPipeline {
       }
 
       for (const dependency of task.dependsOn) {
-        if (graph.has(dependency)) {
-          graph.get(dependency)!.push(task.name);
+        if (graph.has(dependency.toString())) {
+          graph.get(dependency.toString())!.push(task.name);
         } else {
-          graph.set(dependency, [task.name]);
+          graph.set(dependency.toString(), [task.name]);
         }
       }
     }

@@ -33,4 +33,12 @@ export class OraSpinner implements SpinnerInterface {
   error(message?: string): void {
     this.spinner.fail(message);
   }
+
+  info(message?: string): void {
+    this.spinner.info(message ?? '');
+  }
+
+  warning(message?: string): void {
+    this.spinner.warn(message ?? '');
+  }
 }

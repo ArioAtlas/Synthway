@@ -5,7 +5,7 @@
   "main": "index.js",
   "files": ["dist/"],
   "scripts": {
-    "start": "npm run build && node ./dist/app.js",
+    "start": "npm run build && node ./dist/example/app.js",
     "test": "echo \"no test specified\"",
     "clean": "rm -rf node_modules && rm package-lock.json",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
